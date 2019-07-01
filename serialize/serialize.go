@@ -56,9 +56,9 @@ func encode(w io.Writer, value interface{}) error {
 
 // Load reads given file and returns the read config, or error.
 func Load(filename string) (*config.Config, error) {
-	// if nothing is there, fail. User must run 'ipfs init'
+	// if nothing is there, fail. User must run 'ipws init'
 	if !util.FileExists(filename) {
-		return nil, errors.New("ipfs not initialized, please run 'ipfs init'")
+		return nil, errors.New("ipws not initialized, please run 'ipws init'")
 	}
 
 	var cfg config.Config

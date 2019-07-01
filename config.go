@@ -1,4 +1,4 @@
-// package config implements the ipfs config file datastructures and utilities.
+// package config implements the ipws config file datastructures and utilities.
 package config
 
 import (
@@ -12,7 +12,7 @@ import (
 	"github.com/mitchellh/go-homedir"
 )
 
-// Config is used to load ipfs config files.
+// Config is used to load ipws config files.
 type Config struct {
 	Identity  Identity  // local node's peer identity
 	Datastore Datastore // local node's storage
@@ -29,17 +29,19 @@ type Config struct {
 
 	Reprovider   Reprovider
 	Experimental Experiments
+
+	Chain Chain
 }
 
 const (
 	// DefaultPathName is the default config dir name
-	DefaultPathName = ".ipfs"
+	DefaultPathName = ".ipws"
 	// DefaultPathRoot is the path to the default config dir location.
 	DefaultPathRoot = "~/" + DefaultPathName
 	// DefaultConfigFile is the filename of the configuration file
 	DefaultConfigFile = "config"
 	// EnvDir is the environment variable used to change the path root.
-	EnvDir = "IPFS_PATH"
+	EnvDir = "IPWS_PATH"
 )
 
 // PathRoot returns the default configuration root directory

@@ -3,15 +3,15 @@ package config
 type SwarmConfig struct {
 	AddrFilters             []string
 	DisableBandwidthMetrics bool
-	DisableNatPortMap       bool
-	DisableRelay            bool
-	EnableRelayHop          bool
+	// DisableNatPortMap       bool
+	// DisableRelay            bool
+	// EnableRelayHop          bool
 
 	// autorelay functionality
 	// if true, then the libp2p host will be constructed with autorelay functionality.
-	EnableAutoRelay bool
+	// EnableAutoRelay bool
 	// if true, then an AutoNATService will be instantiated to facilitate autorelay
-	EnableAutoNATService bool
+	// EnableAutoNATService bool
 
 	ConnMgr ConnMgr
 }

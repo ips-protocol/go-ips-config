@@ -6,6 +6,6 @@ type Experiments struct {
 	ShardingEnabled      bool
 	Libp2pStreamMounting bool
 	P2pHttpProxy         bool
-	QUIC                 bool
+	// QUIC                 bool
 	PreferTLS            bool
 }

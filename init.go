@@ -38,7 +38,7 @@ func Init(out io.Writer, nBitsForKeypair int) (*Config, error) {
 		Identity:  identity,
 		Discovery: Discovery{
 			MDNS: MDNS{
-				Enabled:  true,
+				// Enabled:  true,
 				Interval: 10,
 			},
 		},
@@ -80,6 +80,9 @@ func Init(out io.Writer, nBitsForKeypair int) (*Config, error) {
 				GracePeriod: DefaultConnMgrGracePeriod.String(),
 				Type:        "basic",
 			},
+		},
+		Chain: Chain{
+			URL: "https://mainnet.ipweb.top/",
 		},
 	}
 

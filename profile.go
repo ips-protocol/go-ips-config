@@ -14,7 +14,7 @@ type Profile struct {
 	// Description briefly describes the functionality of the profile
 	Description string
 
-	// Transform takes ipfs configuration and applies the profile to it
+	// Transform takes ipws configuration and applies the profile to it
 	Transform Transformer
 }
 
@@ -48,13 +48,13 @@ var defaultServerFilters = []string{
 var Profiles = map[string]Profile{
 	"server": {
 		Description: `Disables local host discovery, recommended when
-running IPFS on machines with public IPv4 addresses.`,
+running IPWS on machines with public IPv4 addresses.`,
 
 		Transform: func(c *Config) error {
 			c.Addresses.NoAnnounce = appendSingle(c.Addresses.NoAnnounce, defaultServerFilters)
 			c.Swarm.AddrFilters = appendSingle(c.Swarm.AddrFilters, defaultServerFilters)
-			c.Discovery.MDNS.Enabled = false
-			c.Swarm.DisableNatPortMap = true
+			// c.Discovery.MDNS.Enabled = false
+			// c.Swarm.DisableNatPortMap = true
 			return nil
 		},
 	},
@@ -66,13 +66,13 @@ profile, enables discovery in local networks.`,
 		Transform: func(c *Config) error {
 			c.Addresses.NoAnnounce = deleteEntries(c.Addresses.NoAnnounce, defaultServerFilters)
 			c.Swarm.AddrFilters = deleteEntries(c.Swarm.AddrFilters, defaultServerFilters)
-			c.Discovery.MDNS.Enabled = true
-			c.Swarm.DisableNatPortMap = false
+			// c.Discovery.MDNS.Enabled = true
+			// c.Swarm.DisableNatPortMap = false
 			return nil
 		},
 	},
 	"test": {
-		Description: `Reduces external interference of IPFS daemon, this
+		Description: `Reduces external interference of IPWS daemon, this
 is useful when using the daemon in test environments.`,
 
 		Transform: func(c *Config) error {
@@ -82,10 +82,10 @@ is useful when using the daemon in test environments.`,
 				"/ip4/127.0.0.1/tcp/0",
 			}
 
-			c.Swarm.DisableNatPortMap = true
+			// c.Swarm.DisableNatPortMap = true
 
 			c.Bootstrap = []string{}
-			c.Discovery.MDNS.Enabled = false
+			// c.Discovery.MDNS.Enabled = false
 			return nil
 		},
 	},
@@ -102,8 +102,8 @@ Inverse profile of the test profile.`,
 			}
 			c.Bootstrap = appendSingle(c.Bootstrap, BootstrapPeerStrings(bootstrapPeers))
 
-			c.Swarm.DisableNatPortMap = false
-			c.Discovery.MDNS.Enabled = true
+			// c.Swarm.DisableNatPortMap = false
+			// c.Discovery.MDNS.Enabled = true
 			return nil
 		},
 	},
@@ -111,14 +111,14 @@ Inverse profile of the test profile.`,
 		Description: `Replaces default datastore configuration with experimental
 badger datastore.
 
-If you apply this profile after ipfs init, you will need
+If you apply this profile after ipws init, you will need
 to convert your datastore to the new configuration.
-You can do this using ipfs-ds-convert.
+You can do this using ipws-ds-convert.
 
-For more on ipfs-ds-convert see
-$ ipfs-ds-convert --help
+For more on ipws-ds-convert see
+$ ipws-ds-convert --help
 and
-$ ipfs-ds-convert convert --help
+$ ipws-ds-convert convert --help
 
 WARNING: badger datastore is experimental.
 Make sure to backup your data frequently.`,
@@ -140,14 +140,14 @@ Make sure to backup your data frequently.`,
 	"default-datastore": {
 		Description: `Restores default datastore configuration.
 
-If you apply this profile after ipfs init, you will need
+If you apply this profile after ipws init, you will need
 to convert your datastore to the new configuration.
-You can do this using ipfs-ds-convert.
+You can do this using ipws-ds-convert.
 
-For more on ipfs-ds-convert see
-$ ipfs-ds-convert --help
+For more on ipws-ds-convert see
+$ ipws-ds-convert --help
 and
-$ ipfs-ds-convert convert --help
+$ ipws-ds-convert convert --help
 `,
 
 		Transform: func(c *Config) error {

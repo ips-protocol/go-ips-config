@@ -9,7 +9,7 @@ import (
 )
 
 func TestConfig(t *testing.T) {
-	const filename = ".ipfsconfig"
+	const filename = ".ipwsconfig"
 	cfgWritten := new(config.Config)
 	cfgWritten.Identity.PeerID = "faketest"
 
