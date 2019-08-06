@@ -26,7 +26,11 @@ func Init(out io.Writer, nBitsForKeypair int) (*Config, error) {
 
 	conf := &Config{
 		API: API{
-			HTTPHeaders: map[string][]string{},
+			HTTPHeaders: map[string][]string{
+				"Access-Control-Allow-Origin":      []string{"*"},
+				"Access-Control-Allow-Methods":     []string{"GET", "POST", "OPTIONS"},
+				"Access-Control-Allow-Credentials": []string{"true"},
+			},
 		},
 
 		// setup the node's default addresses.
@@ -99,7 +103,7 @@ const DefaultConnMgrLowWater = 600
 
 // DefaultConnMgrGracePeriod is the default value for the connection managers
 // grace period
-const DefaultConnMgrGracePeriod = time.Second * 20
+const DefaultConnMgrGracePeriod = time.Second * 30
 
 func addressesConfig() Addresses {
 	return Addresses{
@@ -110,7 +114,7 @@ func addressesConfig() Addresses {
 		},
 		Announce:   []string{},
 		NoAnnounce: []string{},
-		API:        Strings{"/ip4/127.0.0.1/tcp/5001"},
+		API:        Strings{"/ip4/0.0.0.0/tcp/5001"},
 		Gateway:    Strings{"/ip4/127.0.0.1/tcp/8080"},
 	}
 }
